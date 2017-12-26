@@ -1,0 +1,11 @@
+#+TITLE:  Spacemacs Configuration
+#+AUTHOR: Howard Abrams
+#+EMAIL:  howard.abrams@gmail.com
+#+DATE:   2017 Dec 21
+#+TAGS:   spacemacs
+
+Didn't take me long after using Spacemacs to start adding my customization.
+While many initial changes could have been avoided by simply searching for the
+Spacemacs default.
+
+Anyway, here we are. An initial attempt as slowly doing some sort of a migration (based mostly on immediate need).

@@ -1,0 +1,16 @@
+#+TITLE:  Spacemacs Configuration History
+#+AUTHOR: Howard Abrams
+#+EMAIL:  howard.abrams@gmail.com
+#+DATE:   2017 Dec 21
+#+TAGS:   spacemacs
+
+This project began in earnest during Winter Break 2017. We called that version
+1.0, and keeping track of the version history seemed like a good idea at the
+time.
+
+** v 1.0 :: 2017.12
+
+   - Created the initial directory structure
+   - Ported the extra functions and misc into =ha-goodies= collection
+   - Ported the org configuration into =ha-org=
+   - Created a way for /computer-specific/ configuration can be stored
