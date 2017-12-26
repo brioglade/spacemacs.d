@@ -1,2 +1,3 @@
-(defconst my-emacs-lisp-packages
+(defconst ha-emacs-lisp-packages
+  smartparens
   )

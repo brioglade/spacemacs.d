@@ -29,7 +29,7 @@
 
 ;;; Code:
 
-(defconst my-goodies-packages
+(defconst ha-goodies-packages
   '(visual-regexp)
   "The list of Lisp packages required by the my-goodies layer.
 
@@ -58,7 +58,7 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun my-goodies/init-visual-regexp ()
+(defun ha-goodies/init-visual-regexp ()
   (use-package visual-regexp
     :ensure t
     :init
@@ -77,7 +77,7 @@ Each entry is either:
       "r q" 'vr/query-replace
       "r m" 'vr/mc-mark)))
 
-(defun my-goodies/post-init-autoinsert
+(defun ha-goodies/post-init-autoinsert
     (use-package autoinsert
       :init
       (setq auto-insert-directory (concat configuration-layer-private-directory

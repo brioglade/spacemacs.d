@@ -16,21 +16,21 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this
-;; layer should be added to `my-org-packages'. Then, for each
+;; layer should be added to `ha-org-packages'. Then, for each
 ;; package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer,
-;;   define a function `my-org/init-PACKAGE' to load and
+;;   define a function `ha-org/init-PACKAGE' to load and
 ;;   initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another
 ;;   Spacemacs layer, so define the functions
-;;   `my-org/pre-init-PACKAGE' and/or `my-org/post-init-PACKAGE'
+;;   `ha-org/pre-init-PACKAGE' and/or `ha-org/post-init-PACKAGE'
 ;;   to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst my-org-packages
+(defconst ha-org-packages
   '(
     ;; We don't have to specify `org' because it is listed in layers.el
     ;; org
@@ -40,7 +40,7 @@
     ;; ox-reveal
     ))
 
-(defun my-org/init-org ()
+(defun ha-org/init-org ()
   (use-package org
     :init
     (setq org-return-follows-link t
@@ -192,15 +192,15 @@
     ;;             ("M-C-y" . org-table-paste-rectangle))
     ))
 
-;; (defun my-org/post-init-org-mime ()
+;; (defun ha-org/post-init-org-mime ()
 ;;   (use-package org-mime
 ;;     :ensure t))
 
-;; (defun my-org/init-org-mime-htmlize ()
+;; (defun ha-org/init-org-mime-htmlize ()
 ;;   (use-package org-mime-htmlize
 ;;     :ensure t))
 
-(defun my-org/init-org-journal ()
+(defun ha-org/init-org-journal ()
   (use-package org-journal
     :ensure t
     :init
@@ -400,7 +400,7 @@
                                    (css        . t)
                                    (plantuml   . t)))))
 
-(defun my-org/init-org-tree-slide()
+(defun ha-org/init-org-tree-slide()
   (use-package org-tree-slide
     :ensure t
     :init
