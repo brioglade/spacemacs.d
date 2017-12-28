@@ -1,0 +1,23 @@
+#+TITLE: ha-UI Layer
+
+* Table of Contents                                        :TOC_4_gh:noexport:
+- [[#description][Description]]
+- [[#install][Install]]
+- [[#key-bindings][Key bindings]]
+
+* Description
+
+  Extracting all my /beautification/ of Spacemacs into its own layer.
+
+  Not exactly sure what I'll be doing here, but I would certainly like to make
+  the modeline a bit less clutter, but also more useful to me.
+
+* Install
+
+  To use this configuration layer, add it to your =~/.spacemacs=. You will need
+  to add =ha-ui= to the existing =dotspacemacs-configuration-layers= list in
+  this file.
+
+* Key bindings
+
+  No key bindings are expected in this layer.

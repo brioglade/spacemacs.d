@@ -1,0 +1,26 @@
+#+TITLE: ha-goodies Layer
+
+* Table of Contents                                        :TOC_4_gh:noexport:
+- [[#description][Description]]
+- [[#install][Install]]
+- [[#key-bindings][Key bindings]]
+
+* Description
+
+  Most of my miscellaneous improvements to Emacs (primarily functions) reside
+  here. Not much rhyme or reason except that I had no where else to place them.
+
+* Install
+
+  To use this configuration layer, add it to your =~/.spacemacs=. You will need
+  to add =ha-ui= to the existing =dotspacemacs-configuration-layers= list in
+  this file.
+
+* Key bindings
+
+  - C-<Return> :: opens up a new line even if the point is in the middle of a
+                  line (similar to the =o= in the normal evil state).
+
+  - <SPC> f + :: find file that is numerically larger than current file.
+  - <SPC> f - :: find file that is numerically less than current file.
+  - <SPC> f n :: searches my notes directory for phrases (need my =find-notes= script)

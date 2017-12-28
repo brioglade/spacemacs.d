@@ -1,4 +1,4 @@
-;;; packages.el --- my-goodies layer packages file for Spacemacs.
+;;; packages.el --- ha-ui layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -18,20 +18,20 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `my-goodies-packages'. Then, for each package PACKAGE:
+;; added to `ha-ui-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `my-goodies/init-PACKAGE' to load and initialize the package.
+;;   function `ha-ui/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `my-goodies/pre-init-PACKAGE' and/or
-;;   `my-goodies/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `ha-ui/pre-init-PACKAGE' and/or
+;;   `ha-ui/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst ha-goodies-packages
-  '(ag visual-regexp visual-regexp-steroids)
-  "The list of Lisp packages required by the my-goodies layer.
+(defconst ha-ui-packages
+  '()
+  "The list of Lisp packages required by the ha-ui layer.
 
 Each entry is either:
 
@@ -58,33 +58,5 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun ha-goodies/init-ag ()
-  (use-package ag
-    :ensure t
-    :config
-    (spacemacs/set-leader-keys
-      "p s" 'projectile-ag)))
-
-(defun ha-goodies/init-visual-regexp ()
-  (use-package visual-regexp
-    :ensure t
-    :bind (("C-c r" . vr/replace)
-           ("C-c q" . vr/query-replace))
-    :config
-    (spacemacs/set-leader-keys
-      "r r" 'vr/replace
-      "r q" 'vr/query-replace
-      "r m" 'vr/mc-mark)))
-
-(defun ha-goodies/post-init-autoinsert
-    (use-package autoinsert
-      :init
-      (setq auto-insert-directory (concat configuration-layer-private-directory
-                                          "templates/"))
-      ;; Don't want to be prompted before insertion:
-      (setq auto-insert-query nil)
-
-      (add-hook 'find-file-hook 'auto-insert)
-      (auto-insert-mode 1)))
 
 ;;; packages.el ends here

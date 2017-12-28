@@ -50,8 +50,7 @@ values."
      smex
      twitter
      ;; elfeed
-     emacs-lisp
-     ;; ha-emacs-lisp
+     ha-emacs-lisp
      clojure
      html
      javascript
@@ -59,14 +58,15 @@ values."
      ruby
      ha-goodies
      ha-org
-     local
-     )
+     ha-ui
+     local)
 
    ;; List of additional packages that will be installed without
    ;; being wrapped in a layer. If you need some configuration
    ;; for these packages, then consider creating a layer. You can
    ;; also put the configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(multiple-cursors visual-regexp-steroids)
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -384,12 +384,12 @@ any user code in there besides modifying the variable values."
 
   ;; Not sure why the font doesn't want to stick ... let's try explicitly
   ;; specifying it:
-  (when (not (spacemacs/set-default-font '("Hasklig"
-                                           :size 16 :weight normal :width normal
-                                           :powerline-scale 0.9)))
+  (when (not (spacemacs/set-default-font
+              '("Hasklig"
+                :size 16 :weight normal :width normal
+                :powerline-scale 0.9)))
     (message "Wasn't able to set the correct default font."))
   (set-default-font dotspacemacs-default-font)
-  (setq powerline-default-separator 'curve)
   (global-vi-tilde-fringe-mode -1))
 
 (defun dotspacemacs/user-init ()
@@ -410,25 +410,15 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (add-to-list 'load-path (concat (getenv "HOME") "/.emacs.d-mine/elisp"))
+  (add-to-list 'load-path (concat (getenv "HOME") "/.spacemacs/elisp"))
+  (add-to-list 'exec-path "/usr/local/bin")
 
-  (spacemacs/toggle-global-whitespace-cleanup-on)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-  (spaceline--column-number-at-pos -1)
-  (spaceline-toggle-column-off)
-  (spaceline-toggle-line-column-off)
-  (spaceline-toggle-buffer-encoding-off)
-  (spaceline-toggle-buffer-encoding-abbrev-off)
-  (spaceline-toggle-input-method-off)
-  (spaceline-toggle-buffer-size-off)
-  (spaceline-toggle-version-control-on)
-  (spaceline-toggle-python-pyenv-on)
-  (spaceline-toggle-python-pyvenv-off)
-  (spaceline-toggle-projectile-root-on)
   (setq evil-move-cursor-back nil
         evil-move-beyond-eol t)
 
+  (global-flycheck-mode)
   (spacemacs/set-leader-keys
     "jj" 'evil-avy-goto-char-timer
     "=" 'er/expand-region)
@@ -453,7 +443,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (yaml-mode less-css-mode clojure-snippets clj-refactor inflections edn peg cider-eval-sexp-fu cider seq queue clojure-mode color-theme-sanityinc-tomorrow visual-regexp-steroids yapfify web-mode web-beautify visual-regexp unfill twittering-mode tagedit smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements pbcopy ox-reveal osx-trash osx-dictionary origami orgit org-tree-slide org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-journal org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode live-py-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc hy-mode htmlize haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub with-editor evil-cleverparens paredit emmet-mode elfeed-web simple-httpd elfeed-org elfeed-goodies ace-jump-mode noflet elfeed diff-hl cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-anaconda company coffee-mode chruby bundler inf-ruby auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link)))
+    (paren-face ag yaml-mode less-css-mode clojure-snippets clj-refactor inflections edn peg cider-eval-sexp-fu cider seq queue clojure-mode color-theme-sanityinc-tomorrow visual-regexp-steroids yapfify web-mode web-beautify visual-regexp unfill twittering-mode tagedit smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder rbenv rake pyvenv pytest pyenv-mode py-isort pug-mode pip-requirements pbcopy ox-reveal osx-trash osx-dictionary origami orgit org-tree-slide org-category-capture org-present org-pomodoro alert log4e gntp org-journal org-download mwim mmm-mode minitest markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode live-py-mode launchctl json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc hy-mode htmlize haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit ghub with-editor evil-cleverparens paredit emmet-mode elfeed-web simple-httpd elfeed-org elfeed-goodies ace-jump-mode noflet elfeed diff-hl cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-anaconda company coffee-mode chruby bundler inf-ruby auto-yasnippet yasnippet auto-dictionary anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-make google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link)))
  '(powerline-buffer-size-suffix nil)
  '(powerline-display-buffer-size nil)
  '(powerline-display-mule-info nil)

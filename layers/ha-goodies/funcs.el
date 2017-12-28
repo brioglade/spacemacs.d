@@ -316,3 +316,39 @@
 (defun ha/autoinsert-yas-expand()
   "Replace text in yasnippet template."
   (yas-expand-snippet (buffer-string) (point-min) (point-max)))
+
+(defun is-mode-p (mode)
+  "Predicate to return `true' if the current buffer's major mode
+matches the requested MODE."
+  (buffer-local-value 'major-mode (current-buffer))
+  (eq major-mode mode))
+
+
+;; Searching and File Location
+
+(setq locate-command "mdfind")  ;; Use Mac OS X's Spotlight
+
+;; However, the problem with locate, is it doesn’t show me any context. My
+;; find-notes script uses both mdfind and grep to both better search and display
+;; some useful context. Just need to wrap that in a function:
+
+(defun find-notes (words)
+  "Search `org-mode' files in specific directories for WORDS.
+
+Uses `find-notes' shell script as a better grep utility.  Not only
+does it show the results in a clickable list, it also highlights
+the result, allowing us to put more context in the output."
+  (interactive "sSearch for words:")
+  (let ((program (concat (getenv "HOME") "/bin/find-notes"))
+        (buffer-name (concat "*find-notes: " words "*")))
+    (call-process program nil buffer-name t words)
+    (switch-to-buffer buffer-name)
+    (read-only-mode 1)
+    (grep-mode)
+    (toggle-truncate-lines)
+    (beginning-of-buffer)
+    (dolist (word (split-string words))
+      (highlight-regexp word))))
+
+(spacemacs/set-leader-keys
+  "fn" 'find-notes)
