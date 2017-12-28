@@ -58,7 +58,6 @@ values."
      ruby
      ha-goodies
      ha-org
-     ha-ui
      local)
 
    ;; List of additional packages that will be installed without
@@ -417,6 +416,22 @@ you should place your code here."
 
   (setq evil-move-cursor-back nil
         evil-move-beyond-eol t)
+
+  (spaceline-toggle-column-off)
+  (spaceline-toggle-line-column-off)
+  (spaceline-toggle-buffer-encoding-off)
+  (spaceline-toggle-buffer-encoding-abbrev-off)
+  (spaceline-toggle-input-method-off)
+  (spaceline-toggle-buffer-size-off)
+  (spaceline-toggle-version-control-on)
+  (spaceline-toggle-python-pyenv-on)
+  (spaceline-toggle-python-pyvenv-off)
+  (spaceline-toggle-projectile-root-on)
+  (spaceline--column-number-at-pos -1)
+  (spaceline-toggle-flycheck-info-on)
+  (spaceline-toggle-flycheck-warning-on)
+  (spaceline-toggle-flycheck-error-on)
+  (spaceline-toggle-minor-modes-off)
 
   (global-flycheck-mode)
   (spacemacs/set-leader-keys
