@@ -1,4 +1,4 @@
-(when (configuration-layer/package-usedp 'my-org)
+(when (configuration-layer/package-usedp 'ha-org)
 
   (defun ha/insert-two-spaces (N)
   "Inserts two spaces at the end of sentences."

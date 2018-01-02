@@ -310,6 +310,23 @@
                            (define-key org-mode-map [remap org-transpose-words] #'ha/transpose-words)))
 (global-set-key [remap transpose-words] #'ha/transpose-words)
 
+;; Unfilling a paragraph joins all the lines in a paragraph into a single line.
+;; Taken from here: http://www.emacswiki.org/UnfillParagraph ... I use this all
+;; the time.
+
+(defun unfill-paragraph ()
+  "Convert a multi-line paragraph into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+;; Handy key definition
+(define-key global-map "\M-Q" 'unfill-paragraph)
+
+(spacemacs/set-leader-keys
+  "xq" 'fill-paragraph
+  "xQ" 'unfill-paragraph)
+
 ;; However, auto insertion requires entering data for particular fields,
 ;; and for that Yasnippet is better, so in this case, we combine them:
 

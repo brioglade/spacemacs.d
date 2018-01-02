@@ -36,6 +36,7 @@
     ;; org
     org-journal
     org-tree-slide
+    org-beautify-theme
     ;; ox-html
     ;; ox-reveal
     ))
@@ -171,7 +172,7 @@
       ("l" org-end-of-item-list)
       ("q" nil :exit t))
 
-    (spacemacs/set-leader-keys-for-major-mode "o" 'spacemacs/org-movement-transient-state/body)
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode "o" 'spacemacs/org-movement-transient-state/body)
 
     ;; I like the idea of more movement within org-files, so I may want to add
     ;; the following:
@@ -406,6 +407,19 @@
     :init
     (setq org-tree-slide-skip-outline-level 4)
     (org-tree-slide-simple-profile)))
+
+;; (defun ha-org/init-org-bullets ()
+;;   (use-package org-bullets
+;;     :ensure t
+;;     :init
+;;     (add-hook 'org-mode-hook 'org-bullets-mode)))
+
+(defun ha-org/init-org-beautify-theme ()
+  (use-package org-beautify-theme
+    :ensure t
+    :init
+    ;; (add-hook 'org-mode-hook 'org-bullets-mode)
+    (load-theme 'org-beautify)))
 
 (spacemacs|use-package-add-hook ox-html
   :post-init
