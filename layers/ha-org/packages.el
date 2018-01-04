@@ -41,9 +41,9 @@
     ;; ox-reveal
     ))
 
-(defun ha-org/init-org ()
-  (use-package org
-    :init
+(defun ha-org/post-init-org ()
+  (spacemacs|use-package-add-hook org
+    :post-init
     (setq org-return-follows-link t
           ;; Speed Commands: If point is at the beginning of a headline or code
           ;; block in org-mode, single keys do fun things. See
@@ -58,7 +58,7 @@
           org-todo-keywords '((sequence "TODO(t)" "DOING(g)" "|" "DONE(d)")
                               (sequence "|" "CANCELED(c)")))
 
-    :config
+    :post-config
     (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
     (add-to-list 'auto-mode-alist '(".*/[0-9]*$" . org-mode))   ;; Journal entries
     (add-hook 'org-mode-hook 'yas-minor-mode-on)
@@ -85,7 +85,8 @@
                   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
     ;; Trying an experiment to see if I like inserting two spaces
-    ;; at the end of a sentence:
+    ;; at the end of a sentence, or should I do:
+    ;; (setq sentence-end-double-space nil)
     (defun ha/insert-two-spaces (N)
       "Inserts two spaces at the end of sentences."
       (interactive "p")
