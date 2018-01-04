@@ -76,11 +76,15 @@ Each entry is either:
       "r q" 'vr/query-replace
       "r m" 'vr/mc-mark)))
 
+(defun ha-goodies/init-visual-regexp-steroids ()
+  (use-package visual-regexp-steroids
+    :ensure t))
+
 (defun ha-goodies/post-init-autoinsert
     (use-package autoinsert
       :init
-      (setq auto-insert-directory (concat configuration-layer-private-directory
-                                          "templates/"))
+      (setq auto-insert-directory (concat (getenv "HOME")
+                                          "/.spacemacs.d/templates/"))
       ;; Don't want to be prompted before insertion:
       (setq auto-insert-query nil)
 
