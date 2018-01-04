@@ -1,9 +1,5 @@
 (defconst ha-emacs-lisp-packages
-  '(smartparens paren))
-
-(defun ha-emacs-lisp/smartparens ()
-  (use-package smartparens
-    :ensure t))
+  '(paren))
 
 (defun ha-emacs-lisp/init-paren ()
   ;; The reverse mode of the default parenthesis matching doesn’t match as well,
