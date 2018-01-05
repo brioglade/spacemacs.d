@@ -1,5 +1,5 @@
 (defconst ha-emacs-lisp-packages
-  '(paren))
+  '(paren suggest))
 
 (defun ha-emacs-lisp/init-paren ()
   ;; The reverse mode of the default parenthesis matching doesn’t match as well,
@@ -12,3 +12,7 @@
     (set-face-background 'show-paren-mismatch (face-background 'default))
     (set-face-foreground 'show-paren-mismatch "#c66")
     (set-face-attribute  'show-paren-mismatch nil :weight 'black)))
+
+(defun ha-emacs-lisp/init-suggest ()
+  (use-package suggest
+    :ensure t))
