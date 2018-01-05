@@ -368,4 +368,5 @@ the result, allowing us to put more context in the output."
       (highlight-regexp word))))
 
 (spacemacs/set-leader-keys
-  "fn" 'find-notes)
+  "fn" 'find-notes
+  "zb" 'text-scale-adjust)
