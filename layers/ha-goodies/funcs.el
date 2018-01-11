@@ -370,3 +370,39 @@ the result, allowing us to put more context in the output."
 (spacemacs/set-leader-keys
   "fn" 'find-notes
   "zb" 'text-scale-adjust)
+
+;; The following idea to directly add the previous misspelled word to the personal dictionary was taken from this discussion:
+;; https://emacs.stackexchange.com/questions/16837/add-last-mistake-to-dictionary-with-flyspell-and-ispell
+
+(defun flyspell-goto-previous-error ()
+  "Go to previous spelling error."
+  (interactive)
+  (push-mark (point) t nil)
+  (let ((pos (point))
+        (min (point-min)))
+    (while (and (> pos min)
+                (let ((ovs (overlays-at pos))
+                      (r '()))
+                  (while (and (not r) (consp ovs))
+                    (if (flyspell-overlay-p (car ovs))
+                        (setq r t)
+                      (setq ovs (cdr ovs))))
+                  (not r)))
+      (backward-word 1)
+      (setq pos (point)))
+    (goto-char pos)))
+
+(defun flyspell-add-false-postive ()
+  "Add previous false positive to dict"
+  (interactive)
+  (save-excursion
+    (flyspell-goto-previous-error)
+    (let* ((flyspell-info (flyspell-get-word))
+           (word (car flyspell-info))
+           (bounds (cdr flyspell-info)))
+      (flyspell-do-correct 'save nil word (point) (car bounds) (cadr bounds) (point))
+      (flyspell-delete-region-overlays (car bounds) (cadr bounds)))))
+
+(spacemacs/set-leader-keys
+  "Sp" 'flyspell-goto-previous-error
+  "Sa" 'add-false-postive)
