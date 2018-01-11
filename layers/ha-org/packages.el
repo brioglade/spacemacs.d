@@ -178,13 +178,11 @@
     ;; I like the idea of more movement within org-files, so I may want to add
     ;; the following:
 
-    ;; (spacemacs/set-leader-keys-for-major-mode 'org-mode
-    ;;   ",p"  'org-previous-visible-heading
-    ;;   ",n"  'org-next-visible-heading
-    ;;   "oln" 'org-end-of-item-list
-    ;;   "olp" 'org-beginning-of-item-list
-    ;;   "oty" 'org-table-copy-region
-    ;;   "otp" 'org-table-paste-rectangle)
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "k"  'org-previous-visible-heading
+      "j"  'org-next-visible-heading
+      "[" 'org-beginning-of-item-list
+      "]" 'org-end-of-item-list)
 
     ;; :bind (:map org-mode-map
     ;;             ("M-C-n" . org-end-of-item-list)
