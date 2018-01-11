@@ -80,15 +80,16 @@ Each entry is either:
   (use-package visual-regexp-steroids
     :ensure t))
 
-(defun ha-goodies/post-init-autoinsert
-    (use-package autoinsert
-      :init
-      (setq auto-insert-directory (concat (getenv "HOME")
-                                          "/.spacemacs.d/templates/"))
-      ;; Don't want to be prompted before insertion:
-      (setq auto-insert-query nil)
+(defun ha-goodies/post-init-autoinsert ()
+  (use-package autoinsert
+    :init
+    (setq auto-insert-directory
+          (concat (getenv "HOME")
+                  "/.spacemacs.d/templates/"))
+    ;; Don't want to be prompted before insertion:
+    (setq auto-insert-query nil)
 
-      (add-hook 'find-file-hook 'auto-insert)
-      (auto-insert-mode 1)))
+    (add-hook 'find-file-hook 'auto-insert)
+    (auto-insert-mode 1)))
 
 ;;; packages.el ends here
