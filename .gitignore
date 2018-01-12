@@ -3,3 +3,4 @@ elisp/
 /.DS_Store
 *~
 /layers/local
+/custom.el
