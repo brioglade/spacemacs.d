@@ -371,7 +371,8 @@ the result, allowing us to put more context in the output."
   "fn" 'find-notes
   "zb" 'text-scale-adjust)
 
-;; The following idea to directly add the previous misspelled word to the personal dictionary was taken from this discussion:
+;; The following idea to directly add the previous misspelled word to the
+;; personal dictionary was taken from this discussion:
 ;; https://emacs.stackexchange.com/questions/16837/add-last-mistake-to-dictionary-with-flyspell-and-ispell
 
 (defun flyspell-goto-previous-error ()
@@ -404,5 +405,6 @@ the result, allowing us to put more context in the output."
       (flyspell-delete-region-overlays (car bounds) (cadr bounds)))))
 
 (spacemacs/set-leader-keys
+  "SS" 'ispell-word
   "Sp" 'flyspell-goto-previous-error
   "Sa" 'add-false-postive)
