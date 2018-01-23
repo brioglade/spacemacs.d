@@ -436,9 +436,11 @@ you should place your code here."
   (spaceline-toggle-minor-modes-off)
 
   (global-flycheck-mode)
+
   (spacemacs/set-leader-keys
-    "jj" 'evil-avy-goto-char-timer
-    "=" 'er/expand-region)
+    "<SPC>" 'spacemacs/smex
+    "ff" 'ido-find-file
+    "jj" 'evil-avy-goto-char-timer)
 
   (setq custom-file (concat (getenv "HOME") "/.spacemacs.d/custom.el"))
   (when (file-exists-p custom-file)
