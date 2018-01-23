@@ -53,7 +53,7 @@ values."
      ha-emacs-lisp
      clojure
      html
-     ;; javascript
+     javascript
      python
      ruby
      ha-goodies
