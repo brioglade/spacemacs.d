@@ -408,10 +408,3 @@ the result, allowing us to put more context in the output."
   "SS" 'ispell-word
   "Sp" 'flyspell-goto-previous-error
   "Sa" 'flyspell-add-false-postive)
-
-(spacemacs/set-leader-keys
-  "gn" 'end-of-defun
-  "gp" 'beginning-of-defun)
-
-(define-key evil-normal-state-map (kbd "ga") 'beginning-of-defun)
-(define-key evil-normal-state-map (kbd "ge") 'end-of-defun)

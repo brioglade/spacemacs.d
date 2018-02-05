@@ -413,6 +413,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (add-to-list 'load-path (concat (getenv "HOME") "/.spacemacs/elisp"))
   (add-to-list 'exec-path "/usr/local/bin")
+  (setq custom-file (concat (getenv "HOME") "/.spacemacs.d/custom.el"))
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -440,9 +441,12 @@ you should place your code here."
   (spacemacs/set-leader-keys
     "<SPC>" 'spacemacs/smex
     "ff" 'ido-find-file
-    "jj" 'evil-avy-goto-char-timer)
+    "jj" 'evil-avy-goto-char-timer
+    "gn" 'end-of-defun
+    "gp" 'beginning-of-defun)
+  (define-key evil-normal-state-map (kbd "ga") 'beginning-of-defun)
+  (define-key evil-normal-state-map (kbd "ge") 'end-of-defun)
 
-  (setq custom-file (concat (getenv "HOME") "/.spacemacs.d/custom.el"))
   (when (file-exists-p custom-file)
     (load custom-file))
 

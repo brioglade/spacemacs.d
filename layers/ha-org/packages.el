@@ -32,8 +32,7 @@
 
 (defconst ha-org-packages
   '(
-    ;; We don't have to specify `org' because it is listed in layers.el
-    ;; org
+    org
     org-journal
     org-tree-slide
     org-beautify-theme
@@ -356,19 +355,24 @@
       (beginning-of-line 1)
       (point))
 
-    (setq org-capture-templates
-          '(("n" "Thought or Note"  entry
-             (file org-default-notes-file)
-             "* %?\n\n  %i\n\n  See: %a" :empty-lines 1)
-            ("j" "Journal Note"     entry
-             (file (get-journal-file-today))
-             "* %?\n\n  %i\n\n  From: %a" :empty-lines 1)
-            ("t" "Task Entry"        entry
-             (file+function org-default-tasks-file ha/load-org-tasks)
-             "* %?\n\n  %i\n\n  From: %a" :empty-lines 1)
-            ("w" "Website Announcement" entry
-             (file+function "~/website/index.org" ha/first-header)
-             "* %?
+    (defvar org-capture-templates (list))
+    (add-to-list 'org-capture-templates
+                 '("n" "Thought or Note"  entry
+                   (file org-default-notes-file)
+                   "* %?\n\n  %i\n\n  See: %a" :empty-lines 1))
+    (add-to-list 'org-capture-templates
+                 '("j" "Journal Note"     entry
+                   (file (get-journal-file-today))
+                   "* %?\n\n  %i\n\n  From: %a" :empty-lines 1))
+    (add-to-list 'org-capture-templates
+                 '("t" "Task Entry"        entry
+                   (file+function org-default-tasks-file
+                                  ha/load-org-tasks)
+                   "* %?\n\n  %i\n\n  From: %a" :empty-lines 1))
+    (add-to-list 'org-capture-templates
+                 '("w" "Website Announcement" entry
+                   (file+function "~/website/index.org" ha/first-header)
+                   "* %?
       :PROPERTIES:
       :PUBDATE: %t
       :END:
@@ -376,7 +380,7 @@
 
       %i
 
-      [[%F][Read more...]" :empty-lines 1)))
+      [[%F][Read more...]" :empty-lines 1))
 
     (spacemacs/set-leader-keys
       "fj" 'journal-file-today
