@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst ha-goodies-packages
-  '(ag visual-regexp visual-regexp-steroids)
+  '(ag visual-regexp visual-regexp-steroids floobits)
   "The list of Lisp packages required by the my-goodies layer.
 
 Each entry is either:
@@ -91,5 +91,18 @@ Each entry is either:
 
     (add-hook 'find-file-hook 'auto-insert)
     (auto-insert-mode 1)))
+
+(defun ha-goodies/init-floobits ()
+  "Floobits: https://github.com/Floobits/floobits-emacs"
+  (use-package floobits
+    :ensure t
+    :config
+    (spacemacs/set-leader-keys
+      "a f J" 'floobits-join-workspace
+      "a f S" 'floobits-share-dir-private   ; Create a workspace and populate it with the contents of the directory, DIR (or make it).
+      "a f s" 'floobits-summon              ; Summon everyone in the workspace to your cursor position
+      "a f f" 'floobits-follow-mode-toggle  ; Toggle following of recent changes.
+      "a f c" 'floobits-clear-highlights    ; Clears all mirrored highlights.
+      "a f L" 'floobits-leave-workspace)))
 
 ;;; packages.el ends here
