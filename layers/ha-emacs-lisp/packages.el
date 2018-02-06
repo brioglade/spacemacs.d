@@ -25,8 +25,16 @@ evil-lisp-state-like keys to evil's normal state."
     :init
     (setq evil-move-beyond-eol t
           evil-cleverparens-use-additional-movement-keys t)
+    (spacemacs|add-toggle evil-cleverparens
+      :mode evil-cleverparens-mode
+      :documentation "Enable evil-cleverparens.")
+    (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
     (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
-    (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)))
+
+    :config
+    (spacemacs/toggle-evil-cleverparens-on)
+    ;; Since the :diminish doesn't work with spaceline, we:
+    (spacemacs|hide-lighter evil-cleverparens-mode)))
 
 (defun ha-emacs-lisp/init-suggest ()
   "This separate application helps me find the Lisp function
