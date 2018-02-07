@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
-;; Author: Howard Abrams <howard.abrams@HABRAMS-02>
+;; Author: Howard Abrams <howard.abrams@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst ha-pythonic-packages
-  '(pipenv)
+  '(pipenv evil-surround)
   "The list of Lisp packages required by the ha/pythonic layer.
 
 Each entry is either:
@@ -68,5 +68,11 @@ Each entry is either:
      #'pipenv-projectile-after-switch-extended)
     :config
     (add-hook 'python-mode-hook #'pipenv-mode)))
+
+(defun ha-pythonic/post-init-evil-surround ()
+  "Shortcut for adding triple quotes in Python"
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (push '(?q . ("\"\"\"" . "\"\"\"")) evil-surround-pairs-alist))))
 
 ;;; packages.el ends here
