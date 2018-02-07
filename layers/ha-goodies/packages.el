@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
-;; Author: Howard Abrams <howard.abrams@HABRAMS-02>
+;; Author: Howard Abrams <howard.abrams@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -97,6 +97,7 @@ Each entry is either:
   (use-package floobits
     :ensure t
     :config
+    (spacemacs/declare-prefix "a f" "floobits")
     (spacemacs/set-leader-keys
       "a f J" 'floobits-join-workspace
       "a f S" 'floobits-share-dir-private   ; Create a workspace and populate it with the contents of the directory, DIR (or make it).
