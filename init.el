@@ -55,6 +55,7 @@ values."
      html
      javascript
      python
+     ha-pythonic
      ruby
      ha-goodies
      ha-org
