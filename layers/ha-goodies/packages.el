@@ -34,6 +34,7 @@
     autoinsert
     visual-regexp
     visual-regexp-steroids
+    git-timemachine
     floobits)
   "The list of Lisp packages required by the my-goodies layer.
 
@@ -107,6 +108,21 @@ Each entry is either:
     (define-auto-insert "Sprint.*\\.\\org\\'" ["sprint.org" ha/autoinsert-yas-expand])
     (define-auto-insert "test_.*\\.\\rb\\'" ["test_spec.rb" ha/autoinsert-yas-expand])
     (define-auto-insert "/bin/"  ["default.sh" ha/autoinsert-yas-expand])))
+
+(defun ha-goodies/init-git-timemachine ()
+  "Configure git-timemachine: https://github.com/pidu/git-timemachine"
+  (use-package git-timemachine
+    :defer t
+    :ensure t
+    :keys (:local
+           "c" git-timemachine-show-commit)
+    :config
+    (spacemacs/set-leader-keys
+      "g f t" 'git-timemachine)
+
+    (defun git-timemachine-show-commit ()
+      (interactive)
+      (magit-show-commit (car git-timemachine-revision))))
 
 (defun ha-goodies/init-floobits ()
   "Floobits: https://github.com/Floobits/floobits-emacs"
