@@ -30,7 +30,11 @@
 ;;; Code:
 
 (defconst ha-goodies-packages
-  '(ag visual-regexp visual-regexp-steroids floobits)
+  '(ag
+    autoinsert
+    visual-regexp
+    visual-regexp-steroids
+    floobits)
   "The list of Lisp packages required by the my-goodies layer.
 
 Each entry is either:
@@ -80,17 +84,29 @@ Each entry is either:
   (use-package visual-regexp-steroids
     :ensure t))
 
-(defun ha-goodies/post-init-autoinsert ()
+(defun ha-goodies/init-autoinsert ()
   (use-package autoinsert
     :init
-    (setq auto-insert-directory
-          (concat (getenv "HOME")
-                  "/.spacemacs.d/templates/"))
-    ;; Don't want to be prompted before insertion:
-    (setq auto-insert-query nil)
-
+    (setq
+     auto-insert 'other
+     auto-insert-directory (concat (getenv "HOME")
+                                   "/.spacemacs.d/templates/")
+     ;; Don't want to be prompted before insertion:
+     auto-insert-query nil)
     (add-hook 'find-file-hook 'auto-insert)
-    (auto-insert-mode 1)))
+    (auto-insert-mode 1)
+
+    :config
+    ;; Every template that begins with `default' will be automatically added as
+    ;; the default template for a particular file extension.
+    (dolist (template (directory-files auto-insert-directory nil "default.*"))
+      (let* ((ext (file-name-extension template))
+             (pattern (concat "\\." ext "$")))
+        (define-auto-insert pattern (vector template 'ha/autoinsert-yas-expand))))
+
+    (define-auto-insert "Sprint.*\\.\\org\\'" ["sprint.org" ha/autoinsert-yas-expand])
+    (define-auto-insert "test_.*\\.\\rb\\'" ["test_spec.rb" ha/autoinsert-yas-expand])
+    (define-auto-insert "/bin/"  ["default.sh" ha/autoinsert-yas-expand])))
 
 (defun ha-goodies/init-floobits ()
   "Floobits: https://github.com/Floobits/floobits-emacs"

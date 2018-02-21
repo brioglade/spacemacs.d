@@ -1,0 +1,6 @@
+#+TITLE:  ${1}
+#+AUTHOR: Howard Abrams
+#+EMAIL:  howard.abrams@workday.com
+#+DATE:   `(format-time-string "%Y-%m-%d %B")`
+
+* ${0}

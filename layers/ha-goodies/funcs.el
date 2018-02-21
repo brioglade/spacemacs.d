@@ -331,8 +331,14 @@
 ;; and for that Yasnippet is better, so in this case, we combine them:
 
 (defun ha/autoinsert-yas-expand()
-  "Replace text in yasnippet template."
-  (yas-expand-snippet (buffer-string) (point-min) (point-max)))
+  "Replace text in yasnippet template. This compensates for a
+bug(?) in the `yas-expand-snippet' function where it doesn't
+delete the current contents of the specified region (like the
+entire buffer that was inserted)."
+  (let ((template (buffer-string)))
+    (delete-region (point-min) (point-max))
+    (yas-expand-snippet template)
+    (evil-insert-state)))
 
 (defun is-mode-p (mode)
   "Predicate to return `true' if the current buffer's major mode
