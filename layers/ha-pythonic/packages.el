@@ -70,9 +70,12 @@ Each entry is either:
     (add-hook 'python-mode-hook #'pipenv-mode)))
 
 (defun ha-pythonic/post-init-evil-surround ()
-  "Shortcut for adding triple quotes in Python"
+  "Shortcut for adding triple quotes in Python. To use, first
+surround a region with `v' (or `SPC v'), then type `s' and
+then `q'."
   (add-hook 'python-mode-hook
             (lambda ()
-              (push '(?q . ("\"\"\"" . "\"\"\"")) evil-surround-pairs-alist))))
+              (push '(?q . ("\"\"\"" . "\"\"\""))
+                    evil-surround-pairs-alist))))
 
 ;;; packages.el ends here
