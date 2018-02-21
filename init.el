@@ -65,7 +65,11 @@ values."
    ;; being wrapped in a layer. If you need some configuration
    ;; for these packages, then consider creating a layer. You can
    ;; also put the configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(multiple-cursors visual-regexp-steroids magit-gerrit)
+   dotspacemacs-additional-packages '(multiple-cursors
+                                      visual-regexp-steroids
+                                      magit-gerrit
+                                      ag
+                                      ack)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -419,7 +423,10 @@ you should place your code here."
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
   (setq evil-move-cursor-back nil
-        evil-move-beyond-eol t)
+        evil-move-beyond-eol t
+        safe-local-variable-values '(
+                                     (org-content . 2)
+                                     ))
 
   (spaceline-toggle-column-off)
   (spaceline-toggle-line-column-off)
@@ -436,7 +443,10 @@ you should place your code here."
   (spaceline-toggle-flycheck-warning-on)
   (spaceline-toggle-flycheck-error-on)
   (spaceline-toggle-minor-modes-off)
-
+  (spaceline-toggle-point-position-off)
+  ;; According to https://github.com/syl20bnr/spacemacs/issues/9881
+  ;; we may want to this
+  (spaceline-toggle-purpose-on)
   (global-flycheck-mode)
 
   (spacemacs/set-leader-keys
