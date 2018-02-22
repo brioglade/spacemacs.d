@@ -114,15 +114,14 @@ Each entry is either:
   (use-package git-timemachine
     :defer t
     :ensure t
-    :keys (:local
-           "c" git-timemachine-show-commit)
+    ;; :bind-keymap ("c" git-timemachine-show-commit)
     :config
     (spacemacs/set-leader-keys
       "g f t" 'git-timemachine)
 
     (defun git-timemachine-show-commit ()
       (interactive)
-      (magit-show-commit (car git-timemachine-revision))))
+      (magit-show-commit (car git-timemachine-revision)))))
 
 (defun ha-goodies/init-floobits ()
   "Floobits: https://github.com/Floobits/floobits-emacs"
