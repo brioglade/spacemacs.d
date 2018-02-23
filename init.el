@@ -59,6 +59,7 @@ values."
      ruby
      ha-goodies
      ha-org
+     floobits
      local)
 
    ;; List of additional packages that will be installed without
@@ -385,8 +386,9 @@ you should place your code here."
     "jj" 'evil-avy-goto-char-timer
     "gn" 'end-of-defun
     "gp" 'beginning-of-defun)
-  (define-key evil-normal-state-map (kbd "ga") 'beginning-of-defun)
-  (define-key evil-normal-state-map (kbd "ge") 'end-of-defun)
+
+  (define-key evil-normal-state-map (kbd "gt") 'beginning-of-defun)
+  (define-key evil-normal-state-map (kbd "gb") 'end-of-defun)
 
   (use-package color-theme-sanityinc-tomorrow
     :ensure t
