@@ -355,10 +355,12 @@ you should place your code here."
 
   (setq evil-move-cursor-back nil
         evil-move-beyond-eol t
+        tags-add-tables nil
         safe-local-variable-values '(
                                      (org-content . 2)
                                      ))
 
+  (set-face-attribute 'region nil :background "#009")
   (spaceline-toggle-column-off)
   (spaceline-toggle-line-column-off)
   (spaceline-toggle-buffer-encoding-off)
