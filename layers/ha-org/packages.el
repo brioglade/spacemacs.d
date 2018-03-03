@@ -36,8 +36,8 @@
     org-journal
     org-tree-slide
     org-beautify-theme
-    ;; ox-html
-    ;; ox-reveal
+    ox-html
+    ox-reveal
     ))
 
 (defun ha-org/post-init-org ()
@@ -58,6 +58,9 @@
                               (sequence "|" "CANCELED(c)")))
 
     :post-config
+    (use-package ox-confluence)
+    (use-package ox-md)
+
     (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
     (add-to-list 'auto-mode-alist '(".*/[0-9]*$" . org-mode))   ;; Journal entries
     (add-hook 'org-mode-hook 'yas-minor-mode-on)
@@ -424,12 +427,15 @@
     ;; (add-hook 'org-mode-hook 'org-bullets-mode)
     (load-theme 'org-beautify)))
 
-(spacemacs|use-package-add-hook ox-html
-  :post-init
-  (setq org-html-postamble nil
-        org-export-with-section-numbers nil
-        org-export-with-toc nil
-        org-html-head-extra "
+(defun ha-goodies/post-init-ox-html ()
+  "Configuration for exporting via HTML."
+
+  (spacemacs|use-package-add-hook ox-html
+    :post-init
+    (setq org-html-postamble nil
+          org-export-with-section-numbers nil
+          org-export-with-toc nil
+          org-html-head-extra "
           <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
           <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
           <style type='text/css'>
@@ -439,15 +445,30 @@
              pre, code {
                 font-family: 'Source Code Pro', monospace;
              }
-          </style>"))
+          </style>")))
 
-;; Generate presentations from my org-mode files using
-;; [[https://github.com/yjwen/org-reveal][org-reveal]]. Just download and make the results available to the
-;; HTML output:
+(defun ha-org/init-ox-reveal ()
+  "Generate presentations from my org-mode files using
+https://github.com/yjwen/org-reveal. Just download and make the
+results available to the HTML output."
+  (use-package ox-reveal
+    :ensure t
+    :defer t
+    :init
+    (setq org-reveal-postamble "Howard Abrams"
+          org-reveal-root (concat "file://" (getenv "HOME") "/Public/js/reveal.js"))))
 
-(spacemacs|use-package-add-hook ox-reveal
-  :post-init
-  (setq org-reveal-postamble "Howard Abrams"
-        org-reveal-root (concat "file://" (getenv "HOME") "/Public/js/reveal.js")))
+(defun ha-org/post-init-evil-surround ()
+  "Add more pairs for org-specific text phrases to surround text."
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (push '(?b . ("*" . "*")) evil-surround-pairs-alist)
+              (push '(?i . ("/" . "/")) evil-surround-pairs-alist)
+              (push '(?u . ("_" . "_")) evil-surround-pairs-alist)
+              (push '(?c . ("~" . "~")) evil-surround-pairs-alist)
+              (push '(?v . ("=" . "=")) evil-surround-pairs-alist)
+              (push '(?s . ("#+BEGIN_SRC " . "#+END_SRC")) evil-surround-pairs-alist)
+              (push '(?e . ("#+BEGIN_EXAMPLE" . "#+END_EXAMPLE")) evil-surround-pairs-alist)
+              (push '(?q . ("#+BEGIN_QUOTE" . "#+END_QUOTE")) evil-surround-pairs-alist))))
 
 ;;; packages.el ends here

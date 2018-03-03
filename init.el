@@ -75,7 +75,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(eyebrowse)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -360,7 +360,7 @@ you should place your code here."
                                      (org-content . 2)
                                      ))
 
-  (set-face-attribute 'region nil :background "#009")
+  (set-face-attribute 'region nil :background "#00b")
   (spaceline-toggle-column-off)
   (spaceline-toggle-line-column-off)
   (spaceline-toggle-buffer-encoding-off)
