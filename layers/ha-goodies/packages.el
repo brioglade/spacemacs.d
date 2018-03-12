@@ -31,6 +31,7 @@
 
 (defconst ha-goodies-packages
   '(ag
+    full-ack
     autoinsert
     visual-regexp
     visual-regexp-steroids)
@@ -67,6 +68,21 @@ Each entry is either:
     :config
     (spacemacs/set-leader-keys
       "p s" 'projectile-ag)))
+
+(defun ha-goodies/init-full-ack ()
+  (use-package full-ack
+    :ensure t
+    :init
+    (autoload 'ack-same "full-ack" nil t)
+    (autoload 'ack "full-ack" nil t)
+    (autoload 'ack-find-same-file "full-ack" nil t)
+    (autoload 'ack-find-file "full-ack" nil t)
+
+    :config
+    ;; Having troubles with `projectile-ack', and perhaps this direct wrapper
+    ;; will help with both using `full-ack' as well as address the annoying
+    ;; mode-line issues associated with `ag':
+    (spacemacs/set-leader-keys "/" 'ack)))
 
 (defun ha-goodies/init-visual-regexp ()
   (use-package visual-regexp
