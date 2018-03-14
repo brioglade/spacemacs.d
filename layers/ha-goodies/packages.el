@@ -82,7 +82,8 @@ Each entry is either:
     ;; Having troubles with `projectile-ack', and perhaps this direct wrapper
     ;; will help with both using `full-ack' as well as address the annoying
     ;; mode-line issues associated with `ag':
-    (spacemacs/set-leader-keys "/" 'ack)))
+    (spacemacs/set-leader-keys "p s" 'ack)
+    (spacemacs/set-leader-keys "p /" 'projectile-ack)))
 
 (defun ha-goodies/init-visual-regexp ()
   (use-package visual-regexp

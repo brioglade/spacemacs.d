@@ -384,6 +384,7 @@ you should place your code here."
 
   (spacemacs/set-leader-keys
     "<SPC>" 'spacemacs/smex
+    "/"  'counsel-grep
     "ff" 'ido-find-file
     "jj" 'evil-avy-goto-char-timer
     "gn" 'end-of-defun
