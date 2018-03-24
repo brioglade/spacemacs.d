@@ -395,8 +395,18 @@ you should place your code here."
 
   ;; Bind the prominent keys on my keyboard.io to useful functions:
   (global-set-key (kbd "<kp-1>") 'er/expand-region)
-  (global-set-key (kbd "<kp-2>") 'newline-for-code)
+  (global-set-key (kbd "<kp-2>") 'special-return)
   (global-set-key (kbd "<kp-3>") 'evil-avy-goto-char-timer)
+
+  (defun special-return ()
+    "Fancy return bound to a almost-return key. If in org-mode,
+this inserts a new line of the same type as the current line (if
+making a list, it makes a new list, etc). Otherwise, this inserts
+a new blank line."
+    (interactive)
+    (if (equal major-mode 'org-mode)
+        (ha/org-special-return)
+      (newline-for-code)))
 
   (use-package color-theme-sanityinc-tomorrow
     :ensure t
