@@ -64,6 +64,7 @@
     (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
     (add-to-list 'auto-mode-alist '(".*/[0-9]*$" . org-mode))   ;; Journal entries
     (add-hook 'org-mode-hook 'yas-minor-mode-on)
+    (add-hook 'org-mode-hook 'spacemacs/toggle-auto-fill-mode-on)
 
     (font-lock-add-keywords            ; A bit silly but my headers are now
      'org-mode `(("^\\*+ \\(TODO\\) "  ; shorter, and that is nice canceled
