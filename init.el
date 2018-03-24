@@ -393,6 +393,11 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "gt") 'beginning-of-defun)
   (define-key evil-normal-state-map (kbd "gb") 'end-of-defun)
 
+  ;; Bind the prominent keys on my keyboard.io to useful functions:
+  (global-set-key (kbd "<kp-1>") 'er/expand-region)
+  (global-set-key (kbd "<kp-2>") 'newline-for-code)
+  (global-set-key (kbd "<kp-3>") 'evil-avy-goto-char-timer)
+
   (use-package color-theme-sanityinc-tomorrow
     :ensure t
     :init

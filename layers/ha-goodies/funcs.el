@@ -133,8 +133,10 @@
 (defun newline-for-code ()
   "Inserts a newline character, but from the end of the current line."
   (interactive)
-  (move-end-of-line 1)
-  (newline-and-indent))
+  (if (equal major-mode 'org-mode)
+      (evil-org-eol-call 'clever-insert-item)
+    (move-end-of-line 1)
+    (newline-and-indent)))
 
 ;; And we can bind that to the free, /Meta-Return/:
 
