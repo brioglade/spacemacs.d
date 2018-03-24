@@ -70,7 +70,8 @@ values."
                                       visual-regexp-steroids
                                       magit-gerrit
                                       ag
-                                      ack)
+                                      ack
+                                      sanityinc-tomorrow-night)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -360,7 +361,6 @@ you should place your code here."
                                      (org-content . 2)
                                      ))
 
-  (set-face-attribute 'region nil :background "#00b")
   (spaceline-toggle-column-off)
   (spaceline-toggle-line-column-off)
   (spaceline-toggle-buffer-encoding-off)
@@ -401,4 +401,5 @@ you should place your code here."
   (use-package color-theme-sanityinc-tomorrow
     :ensure t
     :init
-    (load-theme 'sanityinc-tomorrow-night)))
+    (load-theme 'sanityinc-tomorrow-night))
+  (set-face-attribute 'region nil :background "#00b"))
