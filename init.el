@@ -71,7 +71,7 @@ values."
                                       magit-gerrit
                                       ag
                                       ack
-                                      sanityinc-tomorrow-night)
+                                      color-theme-sanityinc-tomorrow)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
