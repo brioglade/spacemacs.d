@@ -38,6 +38,8 @@
     org-beautify-theme
     ox-html
     ox-reveal
+    graphviz-dot-mode
+    plantuml-mode
     ))
 
 (defun ha-org/post-init-org ()
@@ -471,5 +473,21 @@ results available to the HTML output."
               (push '(?s . ("#+BEGIN_SRC " . "#+END_SRC")) evil-surround-pairs-alist)
               (push '(?e . ("#+BEGIN_EXAMPLE" . "#+END_EXAMPLE")) evil-surround-pairs-alist)
               (push '(?q . ("#+BEGIN_QUOTE" . "#+END_QUOTE")) evil-surround-pairs-alist))))
+
+
+(defun ha-org/init-graphviz-dot-mode ()
+  (use-package graphviz-dot-mode
+    :ensure t
+    :mode "\\.dot\\'"
+    :init
+    (setq tab-width 4
+          graphviz-dot-indent-width 2
+          graphviz-dot-auto-indent-on-newline t
+          graphviz-dot-auto-indent-on-braces t
+          graphviz-dot-auto-indent-on-semi t)))
+
+(defun ha-org/init-plantuml-mode ()
+  (use-package plantuml-mode
+    :ensure t))
 
 ;;; packages.el ends here
