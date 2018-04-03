@@ -36,8 +36,8 @@
     org-journal
     org-tree-slide
     org-beautify-theme
-    ox-html
-    ox-reveal
+    ;; ox-html
+    ;; ox-reveal
     graphviz-dot-mode
     plantuml-mode
     ))
@@ -450,7 +450,7 @@
              }
           </style>")))
 
-(defun ha-org/init-ox-reveal ()
+(defun ha-org/post-init-ox-reveal ()
   "Generate presentations from my org-mode files using
 https://github.com/yjwen/org-reveal. Just download and make the
 results available to the HTML output."

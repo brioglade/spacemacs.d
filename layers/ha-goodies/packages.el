@@ -33,6 +33,7 @@
   '(ag
     full-ack
     autoinsert
+    ;; magithub
     visual-regexp
     visual-regexp-steroids)
   "The list of Lisp packages required by the my-goodies layer.
@@ -137,5 +138,12 @@ Each entry is either:
 ;;    :config
 ;;    (spacemacs/declare-prefix "a f" "floobits")
 ;;    (spacemacs/set-leader-keys ...)
+
+;; (defun ha-goodies/init-magithub ()
+;;   (use-package magithub
+;;     :after magit
+;;     :config
+;;     (magithub-feature-autoinject t)
+;;     (setq magithub-clone-default-directory "~/Other")))
 
 ;;; packages.el ends here
