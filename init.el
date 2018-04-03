@@ -66,7 +66,7 @@ values."
    ;; being wrapped in a layer. If you need some configuration
    ;; for these packages, then consider creating a layer. You can
    ;; also put the configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(multiple-cursors
+   dotspacemacs-additional-packages '(dash s multiple-cursors
                                       visual-regexp-steroids
                                       magit-gerrit
                                       ag
@@ -326,8 +326,7 @@ any user code in there besides modifying the variable values."
                 :size 16 :weight normal :width normal
                 :powerline-scale 0.9)))
     (message "Wasn't able to set the correct default font."))
-   (set-default-font dotspacemacs-default-font)
-   (global-vi-tilde-fringe-mode -1))
+   (set-default-font dotspacemacs-default-font))
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -336,6 +335,9 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq custom-file (concat (getenv "HOME") "/.spacemacs.d/custom.el"))
+  (load custom-file)
+
   (require 'cl)
   (require 'dash)
   (require 's))
@@ -349,8 +351,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (add-to-list 'load-path (concat (getenv "HOME") "/.spacemacs/elisp"))
   (add-to-list 'exec-path "/usr/local/bin")
-  (setq custom-file (concat (getenv "HOME") "/.spacemacs.d/custom.el"))
-  (load custom-file)
+  (global-vi-tilde-fringe-mode -1)
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
