@@ -68,7 +68,6 @@ values."
    ;; also put the configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(dash s multiple-cursors
                                       visual-regexp-steroids
-                                      magit-gerrit
                                       ag
                                       ack
                                       color-theme-sanityinc-tomorrow)
