@@ -512,9 +512,9 @@ results available to the HTML output."
       (let ((base-directory (plist-get options :base-directory)))
         (org-babel-with-temp-filebuffer (expand-file-name "bottom.html" base-directory) (buffer-string))))
 
-    (defun org-mode-blog-prepare ()
+    (defun org-mode-blog-prepare (&optional options)
       "`index.org' should always be exported so touch the file before publishing."
-      (let* ((base-directory (plist-get project-plist :base-directory))
+      (let* ((base-directory (plist-get options :base-directory))
              (buffer (find-file-noselect (expand-file-name "index.org" base-directory) t)))
         (with-current-buffer buffer
           (set-buffer-modified-p t)
@@ -610,6 +610,5 @@ results available to the HTML output."
              :publishing-directory ,(concat org-mode-publishing-directory "/other/")
              :recursive            t
              :publishing-function  org-publish-attachment
-             ))))
-    )
+             )))))
 ;;; packages.el ends here
