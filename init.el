@@ -70,6 +70,7 @@ values."
                                       visual-regexp-steroids
                                       ag
                                       ack
+                                      yasnippet-snippets
                                       color-theme-sanityinc-tomorrow)
 
    ;; A list of packages that cannot be updated.
