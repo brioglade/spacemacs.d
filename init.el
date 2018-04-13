@@ -389,15 +389,21 @@ you should place your code here."
     "ff" 'ido-find-file
     "jj" 'evil-avy-goto-char-timer
     "gn" 'end-of-defun
-    "gp" 'beginning-of-defun)
+    "gp" 'beginning-of-defun
+
+    "<f16>" (lambda () (interactive) (hlt-unhighlight-isearch-matches))
+    "<f17>" 'ibuffer ; Just temporary until I find a better use
+    "<f18>" 'counsel-imenu)
 
   (define-key evil-normal-state-map (kbd "gt") 'beginning-of-defun)
   (define-key evil-normal-state-map (kbd "gb") 'end-of-defun)
 
   ;; Bind the prominent keys on my keyboard.io to useful functions:
-  (global-set-key (kbd "<kp-1>") 'er/expand-region)
-  (global-set-key (kbd "<kp-2>") 'special-return)
-  (global-set-key (kbd "<kp-3>") 'evil-avy-goto-char-timer)
+  (global-set-key (kbd "<f16>") 'er/expand-region)
+  (global-set-key (kbd "<f17>") 'special-return)
+  (global-set-key (kbd "S-<f17>") 'yas-expand)
+  (global-set-key (kbd "<f18>") 'evil-avy-goto-char-timer)
+  (global-set-key (kbd "S-<f18>") 'counsel-bookmark)
 
   (use-package color-theme-sanityinc-tomorrow
     :ensure t
