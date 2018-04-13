@@ -39,7 +39,7 @@
     ;; ox-html
     ;; ox-reveal
     org-publish
-    htmlize
+    ox-md
     graphviz-dot-mode
     plantuml-mode
     ))
@@ -201,10 +201,6 @@
 
 ;; (defun ha-org/post-init-org-mime ()
 ;;   (use-package org-mime
-;;     :ensure t))
-
-;; (defun ha-org/init-org-mime-htmlize ()
-;;   (use-package org-mime-htmlize
 ;;     :ensure t))
 
 (defun ha-org/init-org-journal ()
@@ -476,6 +472,9 @@ results available to the HTML output."
               (push '(?e . ("#+BEGIN_EXAMPLE" . "#+END_EXAMPLE")) evil-surround-pairs-alist)
               (push '(?q . ("#+BEGIN_QUOTE" . "#+END_QUOTE")) evil-surround-pairs-alist))))
 
+(defun ha-org/init-ox-md ()
+  (use-package ox-md))
+
 
 (defun ha-org/init-graphviz-dot-mode ()
   (use-package graphviz-dot-mode
@@ -490,10 +489,6 @@ results available to the HTML output."
 
 (defun ha-org/init-plantuml-mode ()
   (use-package plantuml-mode
-    :ensure t))
-
-(defun ha-org/init-htmlize ()
-  (use-package htmlize
     :ensure t))
 
 (defun ha-org/init-org-publish ()
