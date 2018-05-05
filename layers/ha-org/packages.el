@@ -38,8 +38,6 @@
     org-beautify-theme
     ;; ox-html
     ;; ox-reveal
-    org-publish
-    ox-md
     graphviz-dot-mode
     plantuml-mode
     ))
@@ -64,6 +62,7 @@
     :post-config
     (use-package ox-confluence)
     (use-package ox-md)
+    (use-package org-publish)
 
     (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
     (add-to-list 'auto-mode-alist '(".*/[0-9]*$" . org-mode))   ;; Journal entries
