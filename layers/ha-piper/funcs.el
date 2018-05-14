@@ -35,9 +35,11 @@
 ;;
 ;;; Code:
 
+(require 'dash)
+
 (defun pipe (command)
   "Replaces the contents of the buffer with the output from the
-    command given."
+command given."
   (interactive "sCommand: ")
   (save-restriction
     (when (region-active-p)
@@ -61,19 +63,21 @@ calling the function."
 
 ;; My trick in naming these functions with a prefix of `spacemacs/' means
 (defun spacemacs/keep-lines ()
-  "docstring"
+  "Removes all lines expect those that match a given regular
+expression either in an active region, or in the entire buffer."
   (interactive)
   (piper--func-on-region-or-buffer #'keep-lines))
 
 (defun spacemacs/flush-lines ()
-  "docstring"
+  "Removes all lines that match a given regular expression either
+in an active region, or in the entire buffer."
   (interactive)
   (piper--func-on-region-or-buffer #'flush-lines))
 
 
 (defun source-environment (file)
   "Add all environment variable settings from a script file into
-    the current Emacs environment, via the `setenv' function."
+the current Emacs environment, via the `setenv' function."
       (interactive "fSource file:")
       (save-excursion
         (with-temp-buffer
@@ -94,24 +98,64 @@ calling the function."
 ;; ------------------------------------------------
 ;;  A replacement for the `cut' cli program...
 
+(defun range-of-numbers (str)
+  "Convert a string, STR, that specifies a range of numbers into a list of integers."
+  (when (string-blank-p str)
+    '())
+
+  (let* ( ; Start with a dash? Let's have that as a range from 1:
+         (initial-one (replace-regexp-in-string "^ *- *" "1-" str))
+         ;; Since we can separate on spaces, make sure dashes don't have spaces:
+         (spaceless-dash (replace-regexp-in-string " *- *" "-" initial-one)))
+    (-flatten
+     (-map (lambda (n)
+               (if (not (string-match "\\([0-9]*\\)[ \t]*-[ \t]*\\([0-9]*\\)" n))
+                   (string-to-number n)
+                 ;; Got a range, convert to a sequence:
+                 (number-sequence (string-to-number (match-string 1 n))
+                                  (string-to-number (match-string 2 n)))))
+             (split-string spaceless-dash " *[ ,] *" t)))))
+
 (defun column-lines-for-line (line delimiter fields)
-  "Separates LINE into a list of strings delimited with DELIMITER.
-    Returns elements specified by FIELDS, which could be a single
-    integer number, a collection of columns (separated by commas), or
-    a range with two numbers separated by a dash."
+  "Separates LINE into a list of strings delimited with
+DELIMITER. Returns elements specified by FIELDS, which could be a
+single integer number, a collection of columns (separated by
+commas), or a range with two numbers separated by a dash."
   (let* ((elements (split-string line delimiter)))
-    (nth-value fields elements)))
+    (-map (lambda (n)
+            (nth-value (1- n) elements))
+          fields)))
 
 (defun column-lines (delimiter fields)
   "Replaces contents of buffer with a subset where each line is a
-    particular field separated by a delimiter. This is similar to the
-    `cut' command, but without all the features...yet."
-  (interactive "sDelimiter: \nnColumn: ")
-  (save-excursion
-    (goto-char (point-min))
-    ;; The fastest approach is _not_ to use regular expressions:
-    (while (re-search-forward "^.*$" nil t)
-      (replace-match (column-lines-for-line (match-string 0) delimiter fields)))))
+particular field separated by a delimiter. This is similar to
+the `cut' command, but without all the features...yet."
+  (interactive "sDelimiter: \nsColumn Numbers(s): ")
+
+  (let ((field-choices (range-of-numbers fields)))
+    (cl-flet* ((line-splitter (line)
+                             (column-lines-for-line line delimiter field-choices))
+              (line-processor (line) ; Split and rejoin the line:
+                              (mapconcat #'identity (line-splitter line) delimiter)))
+      (save-excursion
+        (goto-char (point-min))
+        ;; The fastest approach is _not_ to use regular expressions, but...
+        (while (re-search-forward "^\\(.*\\)$" nil t)
+          (replace-match (line-processor (match-string 1))))))))
+
+
+;;  But what if we want to simply convert a section of tabular-formatted
+;;  text into an s-expression, essentially a list of lists. We could then
+;;  further process it...
+
+(defun table-to-lists (delimiter &optional trim)
+  "Converts the contents of the buffer (or a region) into a list
+of lists where each line should be separated by DELIMITER. If
+TRIM to `t', each column element is trimmed of whitespace."
+  (let ((start (if (region-active-p) (region-beginning) (point-min)))
+        (end   (if (region-active-p) (region-end)       (point-max))))
+    (mapcar (lambda (line) (split-string line delimiter nil trim))
+            (split-string (buffer-substring-no-properties start end) "\n"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; funcs.el ends here

@@ -28,7 +28,6 @@ values."
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
-
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
@@ -59,6 +58,7 @@ values."
      ruby
      ha-goodies
      ha-org
+     ha-piper
      floobits
      local)
 
