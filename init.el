@@ -119,15 +119,14 @@ any user code in there besides modifying the variable values."
    ;; use different package directories for different Emacs versions, set this
    ;; to `emacs-version'.
    dotspacemacs-elpa-subdirectory nil
-   ;; One of `vim', `emacs' or `hybrid'. `hybrid' is like `vim'
-   ;; except that `insert state' is replaced by the `hybrid
-   ;; state' with `emacs' key bindings. The value can also be a
-   ;; list with `:variables' keyword (similar to layers). Check
-   ;; the editing styles section of the documentation for details
-   ;; on available variables. (default 'vim)
-   dotspacemacs-editing-style 'hybrid
-   ;; If non nil output loading progress in `*Messages*' buffer.
-   ;; (default nil)
+   ;; One of `vim', `emacs' or `hybrid'.
+   ;; `hybrid' is like `vim' except that `insert state' is replaced by the
+   ;; `hybrid state' with `emacs' key bindings. The value can also be a list
+   ;; with `:variables' keyword (similar to layers). Check the editing styles
+   ;; section of the documentation for details on available variables.
+   ;; (default 'vim)
+   dotspacemacs-editing-style 'vim
+   ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -301,8 +300,8 @@ any user code in there besides modifying the variable values."
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
    dotspacemacs-highlight-delimiters 'all
-   ;; If non nil, advise quit functions to keep server open when
-   ;; quitting. (default nil)
+   ;; If non nil, advise quit functions to keep server open when quitting.
+   ;; (default nil)
    dotspacemacs-persistent-server nil
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
@@ -426,3 +425,6 @@ opposite key."
     (if (equal major-mode 'org-mode)
         (ha/org-special-return)
       (newline-for-code))))
+
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.

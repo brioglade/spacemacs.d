@@ -38,6 +38,7 @@
     org-beautify-theme
     ;; ox-html
     ;; ox-reveal
+    ox-publish
     graphviz-dot-mode
     plantuml-mode
     ))
@@ -62,7 +63,6 @@
     :post-config
     (use-package ox-confluence)
     (use-package ox-md)
-    (use-package org-publish)
 
     (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
     (add-to-list 'auto-mode-alist '(".*/[0-9]*$" . org-mode))   ;; Journal entries
@@ -490,7 +490,7 @@ results available to the HTML output."
   (use-package plantuml-mode
     :ensure t))
 
-(defun ha-org/init-org-publish ()
+(defun ha-org/init-ox-publish ()
   (use-package ox-rss)
   (use-package ox-publish
     :config
