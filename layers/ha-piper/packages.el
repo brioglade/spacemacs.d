@@ -18,12 +18,16 @@
 (defconst ha-piper-packages
   '(load-env-vars)
   "The list of Lisp packages required by the ha-piper layer
-  should be minimal. ")
+should be minimal. ")
 
 ;; Configure a package that allows you to source in environment variables.
 ;; See: https://github.com/diasjorge/emacs-load-env-vars/
 
-(defun ha-org/post-load-env-vars ()
+(defun ha-org/init-load-env-vars ()
   (use-package load-env-vars))
+
+(defun ha-org/init-dash ()
+  (use-package dash
+    :ensure t))
 
 ;;; packages.el ends here

@@ -35,8 +35,6 @@
 ;;
 ;;; Code:
 
-(require 'dash)
-
 (defun pipe (command)
   "Replaces the contents of the buffer with the output from the
 command given."
