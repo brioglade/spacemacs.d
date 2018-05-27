@@ -359,6 +359,32 @@
       (point))
 
     (defvar org-capture-templates (list))
+    (setq org-capture-default-template "c")
+
+    (add-to-list 'org-capture-templates
+                 `("c" "Item to Current Clocked Task" item
+                   (clock)
+                   "%i%?" :empty-lines 1))
+    (add-to-list 'org-capture-templates
+                 `("C" "Contents to Current Clocked Task" plain
+                   (clock)
+                   "%i" :immediate-finish t :empty-lines 1))
+    (add-to-list 'org-capture-templates
+                 `("K" "Clipboard to Current Clocked Task" plain
+                   (clock)
+                   "%i%x" :immediate-finish t :empty-lines 1))
+
+    (add-to-list 'org-capture-templates
+                 `("f" "Code Reference with Comments to Current Task"
+                   plain (clock)
+                   "%(ha/org-capture-code-snippet \"%F\")\n\n   %?"
+                   :empty-lines 1))
+    (add-to-list 'org-capture-templates
+                 `("F" "Code Reference to Current Task"
+                   plain (clock)
+                   "%(ha/org-capture-code-snippet \"%F\")"
+                   :empty-lines 1 :immediate-finish t))
+
     (add-to-list 'org-capture-templates
                  '("n" "Thought or Note"  entry
                    (file org-default-notes-file)
