@@ -361,7 +361,7 @@ matches the requested MODE."
 Uses `find-notes' shell script as a better grep utility.  Not only
 does it show the results in a clickable list, it also highlights
 the result, allowing us to put more context in the output."
-  (interactive "sSearch for words:")
+  (interactive "sSearch for words: ")
   (let ((program (concat (getenv "HOME") "/bin/find-notes"))
         (buffer-name (concat "*find-notes: " words "*")))
     (call-process program nil buffer-name t words)
