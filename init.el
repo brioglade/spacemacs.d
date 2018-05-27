@@ -31,15 +31,15 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     yaml
      ;; ----------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim
      ;; style) or <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------
-     ivy
+     helm
      auto-completion
      better-defaults
+     dash
      git
      markdown
      spell-checking
@@ -48,18 +48,19 @@ values."
      osx
      smex
      twitter
+     html
+     yaml
      ;; elfeed
+     floobits
      ha-emacs-lisp
      clojure
-     html
      javascript
      python
      ha-pythonic
      ruby
      ha-goodies
      ha-org
-     ha-piper
-     floobits
+     ;; ha-piper
      local)
 
    ;; List of additional packages that will be installed without
@@ -68,8 +69,7 @@ values."
    ;; also put the configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(dash s multiple-cursors
                                       visual-regexp-steroids
-                                      ag
-                                      ack
+                                      ag ack
                                       yasnippet-snippets
                                       color-theme-sanityinc-tomorrow)
 
@@ -125,7 +125,7 @@ any user code in there besides modifying the variable values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
