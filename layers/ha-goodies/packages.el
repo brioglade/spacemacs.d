@@ -33,6 +33,7 @@
   '(ag
     full-ack
     autoinsert
+    fancy-narrow
     ;; magithub
     visual-regexp
     visual-regexp-steroids)
@@ -134,16 +135,51 @@ Each entry is either:
     (interactive)
     (magit-show-commit (car git-timemachine-revision))))
 
-;; Note: To create a labeled entry in the key help area, do:
-;;    :config
-;;    (spacemacs/declare-prefix "a f" "floobits")
-;;    (spacemacs/set-leader-keys ...)
+(defun ha-goodies/init-fancy-narrow ()
+  "Configure the fancy-narrow package: https://github.com/Bruce-Connor/fancy-narrow
 
-;; (defun ha-goodies/init-magithub ()
-;;   (use-package magithub
-;;     :after magit
-;;     :config
-;;     (magithub-feature-autoinject t)
-;;     (setq magithub-clone-default-directory "~/Other")))
+This project works really well for code-reviews and
+presentations, and I just make it a little easier to work with by
+wrapping the standard functions. "
+
+  (use-package fancy-narrow
+    :ensure t
+    :config
+    (defun ha/highlight-block ()
+      "Highlights a 'block' in a buffer defined by the first
+      blank line before and after the current cursor position.
+      Uses the 'fancy-narrow' mode to high-light the block."
+      (interactive)
+      (let (cur beg end)
+        (setq cur (point))
+        (setq end (or (re-search-forward  "^\s*$" nil t) (point-max)))
+        (goto-char cur)
+        (setq beg (or (re-search-backward "^\s*$" nil t) (point-min)))
+        (fancy-narrow-to-region beg end)
+        (goto-char cur)))
+
+    (defun ha/highlight-dwim (num)
+      "If some of the buffer is highlighted with the `fancy-narrow'
+      mode, then un-highlight it by calling `fancy-widen'.
+
+      If region is active, call `fancy-narrow-to-region'.
+
+      If NUM is 0, highlight the current block (delimited by
+      blank lines). If NUM is positive or negative, highlight
+      that number of lines. Otherwise, called
+      `fancy-narrow-to-defun', to highlight current function."
+         (interactive "p")
+         (cond
+          ((fancy-narrow-active-p)  (fancy-widen))
+          ((region-active-p)        (progn
+                                      (fancy-narrow-to-region (region-beginning) (region-end))
+                                      (deactivate-mark)))
+          ((= num 0)                (ha/highlight-block))
+          ((= num 1)                (fancy-narrow-to-defun))
+          (t                        (progn (ha/expand-region num)
+                                           (fancy-narrow-to-region (region-beginning) (region-end))
+                                           (setq mark-active nil)))))
+
+    :bind (("S-<f16>" . ha/highlight-dwim))))
 
 ;;; packages.el ends here
