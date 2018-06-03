@@ -8,4 +8,18 @@ Didn't take me long after using Spacemacs to start adding my customization.
 While many initial changes could have been avoided by simply searching for the
 Spacemacs default.
 
-Anyway, here we are. An initial attempt as slowly doing some sort of a migration (based mostly on immediate need).
+Anyway, here we are. An initial attempt as slowly doing some sort of a migration
+(based mostly on immediate need).
+
+The documentation for Spacemacs is generally quite good, but the following are
+random notes and tips that I often forget and can't find easily.
+
+* Prefix Keys
+
+  Spacemacs has the =which-key= system changes the word ~prefix~ to a better
+  indicator of the subkeys, so to create a labeled entry in the key help area:
+
+  #+BEGIN_SRC elisp
+    (spacemacs/declare-prefix "a f" "far out")
+    (spacemacs/set-leader-keys "a f c" 'far-out-crazy-func)
+  #+END_SRC
