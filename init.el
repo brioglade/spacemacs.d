@@ -394,6 +394,7 @@ you should place your code here."
     "<f17>" 'ibuffer ; Just temporary until I find a better use
     "<f18>" 'counsel-imenu)
 
+  (global-set-key (kbd "C-<Tab>") 'other-frame)
   (define-key evil-normal-state-map (kbd "gt") 'beginning-of-defun)
   (define-key evil-normal-state-map (kbd "gb") 'end-of-defun)
 
