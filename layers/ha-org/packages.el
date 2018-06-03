@@ -372,9 +372,9 @@
                    (clock)
                    "%i" :immediate-finish t :empty-lines 1))
     (add-to-list 'org-capture-templates
-                 `("K" "Clipboard to Current Clocked Task" plain
+                 `("K" "Kill-ring to Current Clocked Task" plain
                    (clock)
-                   "%i%x" :immediate-finish t :empty-lines 1))
+                   "%c" :immediate-finish t :empty-lines 1))
 
     (add-to-list 'org-capture-templates
                  `("f" "Code Reference with Comments to Current Task"
