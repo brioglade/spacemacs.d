@@ -61,7 +61,9 @@
                               (sequence "|" "CANCELED(c)")))
 
     :post-config
-    (use-package ox-confluence)
+    (use-package ox-confluence
+      :load-path "~/.spacemacs.d/elisp/")
+
     (use-package ox-md)
 
     (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
