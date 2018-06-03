@@ -23,11 +23,7 @@ should be minimal. ")
 ;; Configure a package that allows you to source in environment variables.
 ;; See: https://github.com/diasjorge/emacs-load-env-vars/
 
-(defun ha-org/init-load-env-vars ()
+(defun ha-piper/init-load-env-vars ()
   (use-package load-env-vars))
-
-(defun ha-org/init-dash ()
-  (use-package dash
-    :ensure t))
 
 ;;; packages.el ends here
