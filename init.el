@@ -399,7 +399,7 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "gb") 'end-of-defun)
 
   ;; Bind the prominent keys on my keyboard.io to useful functions:
-  (global-set-key (kbd "<f16>") 'er/expand-region)
+  (global-set-key (kbd "<f16>") 'ha/expand-region)
   (global-set-key (kbd "<f17>") 'special-return)
   (global-set-key (kbd "S-<f17>") 'yas-expand)
   (global-set-key (kbd "<f18>") 'evil-avy-goto-char-timer)
